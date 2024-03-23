@@ -1,0 +1,1622 @@
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Python Web Shell</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        body.light-mode {
+            background-color: #fff;
+        }
+
+        .shell-container {
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .shell-input {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+        }
+
+        .shell-output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            height: 200px;
+            overflow-y: scroll;
+            font-size: 14px;
+        }
+
+        .shell-output::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .shell-output::-webkit-scrollbar-track {
+            background-color: #f5f5f5;
+        }
+
+        .shell-output::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 3px;
+        }
+
+        .shell-output::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+
+        .execute-btn,
+        .clear-btn,
+        .light-mode-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .execute-btn:hover,
+        .clear-btn:hover,
+        .light-mode-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .light-mode-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Python Web Shell</h1>
+    <div>
+        <button class="execute-btn">Execute</button>
+        <button class="clear-btn">Clear Output</button>
+        <button class="light-mode-btn" onclick="toggleLightMode()"><span class="light-mode-icon">🌞</span></button>
+    </div>
+
+    <div>
+        <textarea class="shell-input" name="code" placeholder="Enter Python code here"></textarea>
+    </div>
+
+    <div>
+        <textarea class="shell-output" id="output"></textarea>
+    </div>
+
+    <script>
+        const codeInput = document.querySelector('.shell-input');
+        const executeBtn = document.querySelector('.execute-btn');
+        const clearBtn = document.querySelector('.clear-btn');
+        const outputDiv = document.querySelector('.shell-output');
+        const lightModeBtn = document.querySelector('.light-mode-btn');
+        const lightModeIcon = document.querySelector('.light-mode-icon');
+        const body = document.querySelector('body');
+
+        function toggleLightMode() {
+            body.classList.toggle('light-mode');
+            const isLightMode = body.classList.contains('light-mode');
+            lightModeIcon.textContent = isLightMode ? '🌞' : '🌙';
+        }
+
+        executeBtn.addEventListener('click', () => {
+            const code = codeInput.value;
+            outputDiv.textContent = 'Executing...';
+            fetch('/execute', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `code=${encodeURIComponent(code)}`
+            })
+                .then(response => response.text())
+                .then(output => {
+                    outputDiv.innerHTML = `<pre>${output}</pre>`;
+                })
+                .catch(error => {
+                    outputDiv.textContent = `Error: ${error}`;
+                });
+        });
+
+        clearBtn.addEventListener('click', () => {
+            outputDiv.innerHTML = '';
+        });
+    </script>
+</body>
+</html> -->
+
+
+<!-- all done -->
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Python Web Shell</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        body.dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+        .logo {
+    text-align: left;
+}
+
+.logo-title {
+    margin-bottom: 0px;
+}
+
+.logo-link {
+    text-decoration: none;
+}
+
+#logo {
+    width: 150px;
+    height: 50px;
+    display: block;
+    margin: 0 auto;
+    margin-left: 0px;
+   }
+
+.logo-sub-title-wrapper {
+    display: block;
+    margin-top: -10px;
+   
+   
+}
+
+.logo-sub-title {
+    font-size: 18px;
+    font-weight: bold;
+   
+   
+}
+
+        .input {
+  /* display: grid; */
+  grid-template-columns: 1fr  ; /* Two equal-width columns */
+  gap: 10px; /* Gap between columns */
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+        .shell-input {
+            margin-top: 5px;
+            margin-bottom: 2px;
+            width: 48%;
+            height: 250px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+            float: left;
+            overflow-y: scroll;
+            overflow-x: scroll;
+        }
+        .shell-user-input {
+            margin-top: 0px;
+            width: 48%;
+            height: 250px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+            float: left;
+                   }
+        .shell-output {
+            margin-top: -545px;
+            width: 48%;
+            height: 500px;
+             padding: 10px;
+            background-color: #f9f9f9;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+            overflow-y: scroll;
+            font-size: 14px;
+            float: right;
+        }
+
+        .shell-output::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .shell-output::-webkit-scrollbar-track {
+            background-color: #f5f5f5;
+        }
+
+        .shell-output::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 3px;
+        }
+
+        .shell-output::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+            gap: 10px;
+        }
+
+        .execute-btn {
+            padding: 10px;
+           /* margin-right: 535px; */
+            background-color: #ef910f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            float: right;
+        }
+        .clear-btn {
+            padding: 10px;
+            background-color: #ef910f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            float: right;
+        }
+        .save-btn {
+            /* margin-left: 40px; */
+            padding: 10px;
+            background-color: #ef910f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            float: right;
+        }
+        .stop-btn {
+            /* margin-left: 40px; */
+            padding: 10px;
+            background-color: #ef910f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            float: right;
+        }
+        .open-btn {
+            /* margin-left: 40px; */
+            padding: 10px;
+            background-color: #ef910f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            float: right;
+        }
+        .clear-all-btn {
+            /* margin-left: 40px; */
+            padding: 10px;
+            background-color: #ef910f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            float: right;
+        }
+        .dark-mode-toggle {
+            /* margin-left: 450px; */
+            padding: 10px;
+            background-color: #ef910f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .fullscreen-btn {
+            /* margin-left: -20px; */
+            /* margin-right: 15px; */
+            padding: 10px;
+            background-color: #ef910f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode-toggle i,
+        .fullscreen-btn i {
+            margin-right: 5px;
+        }
+
+       
+
+        .fullscreen-btn i:before {
+            content: "\f065"; /* Unicode value for the fullscreen icon */
+        }
+
+        /* Icon for exit fullscreen mode */
+        .fullscreen-btn.fullscreen i:before {
+            content: "\f066"; 
+        }
+
+        /* Custom CSS styles */
+        .custom-style {
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+       
+        .dark-mode .shell-input,
+        .dark-mode .shell-user-input,
+        .dark-mode .shell-output {
+            background-color: #222;
+            color: #fff;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<script src="https://securepubads.g.doubleclick.net/pagead/managed/js/gpt/m202305310101/pubads_impl_page_level_ads.js?cb=31075020" ></script>
+<script></script> 
+</head>
+<body>
+    <div class="header">
+    <div class="logo">
+        <h1 class=" logo-title">
+            <a href="https://stembotix.in/" target="_blank" class="logo-link">
+        <img  id="logo"  src="D:\pyshell\img\logo.svg"    >
+        <span class="logo-sub-title-wrapper">
+            <span class="logo-sub-title">Python Shell</span>
+        </span>
+        </a></h1>
+    </div>
+    </div>
+
+    <div class="button-row">
+        <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+            <i class="fas fa-moon"></i> 
+        </button>
+        <button class="fullscreen-btn dark-mode-toggle" onclick="toggleFullscreen()">
+            <i class="fas fa-expand"></i> 
+        </button>
+        <button class="execute-btn">Execute</button>
+        
+        <button class="save-btn">Save</button>
+        <button class="stop-btn">Stop</button>
+       
+        <button class="clear-all-btn">Clear All</button>
+        <button class="clear-btn">Clear Output</button>
+        <input type="file" id="file-input" accept=".py"  style="display: none;">
+        <button class="open-btn">Open</button>
+       
+    </div>  
+    </div>
+   
+
+    </div>
+</div>
+<div class="input">
+    <div class="column">
+        <textarea class="shell-input" name="code" placeholder="Enter Python code here"></textarea>
+        <textarea class="shell-user-input" name="code" placeholder="Enter user input"></textarea>
+   
+    </div>
+    </div>
+
+</div>
+        <div class="column">
+            <div class="output">
+                
+                    <textarea class="shell-output" id="output"></textarea>
+                </div>
+           
+    </div>
+    
+    <script>
+        const codeInput = document.querySelector('.shell-input');
+        const executeBtn = document.querySelector('.execute-btn');
+        const clearBtn = document.querySelector('.clear-btn');
+        const outputDiv = document.querySelector('.shell-output');
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        const saveBtn = document.querySelector('.save-btn');
+        const clearAllBtn = document.querySelector('.clear-all-btn');
+        const openBtn = document.querySelector('.open-btn');
+        const fileInput = document.getElementById('file-input');
+
+        
+       
+
+
+// execute button event
+        executeBtn.addEventListener('click', () => {
+            const code = codeInput.value;
+           
+            outputDiv.textContent = 'Executing...';
+            stopExecution = false; // Reset stopExecution flag
+
+            fetch('/execute', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `code=${encodeURIComponent(code)}`
+            })
+                .then(response => response.text())
+                .then(output => {
+                    outputDiv.innerHTML = `${output}`;
+                })
+                .catch(error => {
+                    outputDiv.textContent = `Error: ${error}`;
+              });
+        });
+        // stop button event
+        const stopBtn = document.querySelector('.stop-btn');
+        stopBtn.addEventListener('click', () => {
+            stopExecution = true; // Set stopExecution flag to true
+        });
+// clear btn event
+        clearBtn.addEventListener('click', () => {
+            outputDiv.innerHTML = '';
+        });
+// darkmode button event
+function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            codeInput.classList.toggle('dark-mode');
+        } 
+// fullscreen btn event
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+                    document.documentElement.mozRequestFullScreen();
+                } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                    document.documentElement.webkitRequestFullscreen();
+                } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+                    document.documentElement.msRequestFullscreen();
+                }
+                darkModeToggle.classList.add('fullscreen');
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) { // Firefox
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { // IE/Edge
+                    document.msExitFullscreen();
+                }
+                darkModeToggle.classList.remove('fullscreen');
+            }
+        }
+        // save button event
+        
+        saveBtn.addEventListener('click', () => {
+            const code = codeInput.value;
+
+            // Save code to local storage
+            localStorage.setItem('code', code);
+
+            // Generate and save .py file
+            const filename = 'script.py';
+            const blob = new Blob([code], { type: 'text/plain' });
+
+            if (typeof navigator.msSaveBlob !== 'undefined') {
+                navigator.msSaveBlob(blob, filename);
+            } else {
+                const link = document.createElement('a');
+                if (link.download !== undefined) {
+                    const url = URL.createObjectURL(blob);
+                    link.setAttribute('href', url);
+                    link.setAttribute('download', filename);
+                    link.style.visibility = 'hidden';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
+            }
+        });
+
+        // Load code from local storage if available
+        const savedCode = localStorage.getItem('code');
+        if (savedCode) {
+            codeInput.value = savedCode;
+        }
+        
+        // clear all button event
+clearAllBtn.addEventListener('click', () => {
+    codeInput.value = ''; // Clear the Python code input
+    document.querySelector('.shell-user-input').value = ''; // Clear the user input textarea
+    outputDiv.innerHTML = ''; // Clear the output textarea
+});
+       // Open button event
+       openBtn.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        // Handle the selected file
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const fileContent = e.target.result;
+                codeInput.value = fileContent;
+            };
+
+            reader.readAsText(file);
+        });
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Python Web Shell</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        body.dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+        .header {
+    padding: 2px;
+    background-color: #bd955e;
+    color: #fff;
+    /* text-align: center; */
+        }
+        .logo {
+    text-align: left;
+}
+
+.logo-title {
+    margin-bottom: 0px;
+}
+
+.logo-link {
+    text-decoration: none;
+}
+
+#logo {
+    width: 150px;
+    height: 50px;
+    /* display: block; */
+    /* margin: 0 auto; */
+    margin-left: 0px;
+    margin-top: -20px;
+   }
+
+.logo-sub-title-wrapper {
+    display: block;
+    margin-top: -10px;
+   
+   
+}
+
+.logo-sub-title {
+    font-size: 18px;
+    font-weight: bold;
+   
+   
+}
+ .input {
+  /* display: grid; */
+  grid-template-columns: 1fr  ; /* Two equal-width columns */
+  gap: 10px; /* Gap between columns */
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+        .shell-input {
+            margin-top: 5px;
+            margin-bottom: 2px;
+            width: 48%;
+            height: 250px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+            float: left;
+            overflow-y: scroll;
+            overflow-x: scroll;
+        }
+        .shell-user-input {
+            margin-top: 10px;
+            width: 48%;
+            height: 220px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+            float: left;
+                   }
+        .shell-output {
+            margin-top: -523px;
+            width: 48%;
+            height: 500px;
+             padding: 10px;
+            background-color: #f9f9f9;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+            overflow-y: scroll;
+            font-size: 14px;
+            float: right;
+        }
+
+        .shell-output::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .shell-output::-webkit-scrollbar-track {
+            background-color: #f5f5f5;
+        }
+
+        .shell-output::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 3px;
+        }
+
+        .shell-output::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 0px;
+            gap: 10px;
+        }
+.button-row button:hover {
+        /* Styles for the hover effect */
+        text-decoration: underline; /* Apply underline effect on hover */
+    }
+        .execute-btn {
+            padding: 10px;
+           /* margin-right: 535px; */
+            background-color: #ef910f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            float: right;
+        }
+        .clear-btn {
+            padding: 10px;
+            background-color: #ef910f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            float: right;
+        }
+        .save-btn {
+            /* margin-left: 40px; */
+            padding: 10px;
+            background-color: #ef910f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            float: right;
+        }
+        .stop-btn {
+            /* margin-left: 40px; */
+            padding: 10px;
+            background-color: #ef910f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            float: right;
+        }
+        .open-btn {
+            /* margin-left: 40px; */
+            padding: 10px;
+            background-color: #ef910f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            float: right;
+        }
+        .clear-all-btn {
+            /* margin-left: 40px; */
+            padding: 10px;
+            background-color: #ef910f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            float: right;
+        }
+        .dark-mode-toggle {
+            /* margin-left: 450px; */
+            padding: 10px;
+            background-color: #ef910f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .fullscreen-btn {
+            /* margin-left: -20px; */
+            /* margin-right: 15px; */
+            padding: 10px;
+            background-color: #ef910f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode-toggle i,
+        .fullscreen-btn i {
+            margin-right: 5px;
+        }
+
+       
+
+        .fullscreen-btn i:before {
+            content: "\f065"; /* Unicode value for the fullscreen icon */
+        }
+
+        /* Icon for exit fullscreen mode */
+        .fullscreen-btn.fullscreen i:before {
+            content: "\f066"; 
+        }
+
+        /* Custom CSS styles */
+        .custom-style {
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+       
+        .dark-mode .shell-input,
+        .dark-mode .shell-user-input,
+        .dark-mode .shell-output {
+            background-color: #222;
+            color: #fff;
+        }
+       
+    </style>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<script src="https://securepubads.g.doubleclick.net/pagead/managed/js/gpt/m202305310101/pubads_impl_page_level_ads.js?cb=31075020" ></script>
+<script></script> 
+</head>
+<body>
+<div>
+    <div class="header">
+    <div class="logo">
+        <h1 class=" logo-title">
+            <a href="https://stembotix.in/" target="_blank" class="logo-link">
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="131px" height="33px" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g><path style="opacity:0.963" fill="#e9642b" d="M 18.5,-0.5 C 19.5,-0.5 20.5,-0.5 21.5,-0.5C 22.8256,3.7907 23.6589,8.12404 24,12.5C 23.2917,11.6195 22.4584,10.9528 21.5,10.5C 21.2882,8.61589 20.2882,7.28255 18.5,6.5C 16.3886,7.60458 15.0553,9.27124 14.5,11.5C 9.56026,14.7703 5.22693,18.7703 1.5,23.5C 0.833333,22.1667 0.166667,20.8333 -0.5,19.5C -0.5,16.5 -0.5,13.5 -0.5,10.5C 6.09698,7.2247 12.4303,3.55803 18.5,-0.5 Z M 21.5,10.5 C 19.139,10.6741 16.8056,11.0074 14.5,11.5C 15.0553,9.27124 16.3886,7.60458 18.5,6.5C 20.2882,7.28255 21.2882,8.61589 21.5,10.5 Z"/></g>
+                    <g><path style="opacity:0.955" fill="#2b2772" d="M 21.5,10.5 C 22.0312,12.5441 23.1978,14.2107 25,15.5C 25.679,18.5499 26.5123,21.5499 27.5,24.5C 24.8001,27.1733 22.1335,29.84 19.5,32.5C 18.1667,32.5 16.8333,32.5 15.5,32.5C 13.4024,31.065 11.0691,29.8984 8.5,29C 11.247,27.3956 14.247,26.5622 17.5,26.5C 17.5,24.1667 17.5,21.8333 17.5,19.5C 12.2217,21.0369 6.88839,22.3702 1.5,23.5C 5.22693,18.7703 9.56026,14.7703 14.5,11.5C 16.8056,11.0074 19.139,10.6741 21.5,10.5 Z"/></g>
+                    <g><path style="opacity:0.866" fill="#eb632a" d="M 55.5,11.5 C 58.5,11.5 61.5,11.5 64.5,11.5C 64.5,12.8333 64.5,14.1667 64.5,15.5C 62.5328,15.7394 60.6995,15.4061 59,14.5C 58.3333,15.5 58.3333,16.5 59,17.5C 60.0113,16.6634 61.1779,16.33 62.5,16.5C 62.5,17.8333 62.5,19.1667 62.5,20.5C 61.0222,20.238 59.6888,20.5713 58.5,21.5C 60.4765,22.1883 62.4765,21.855 64.5,20.5C 65.1667,17.8333 65.8333,15.1667 66.5,12.5C 67.723,11.3861 69.0563,11.2195 70.5,12C 71.1466,13.6095 71.98,15.1095 73,16.5C 73.6093,12.7168 75.776,11.0502 79.5,11.5C 79.6459,15.3875 80.3126,19.0542 81.5,22.5C 81.5,23.5 81.5,24.5 81.5,25.5C 80.0813,26.4511 78.4147,26.7845 76.5,26.5C 76.6641,23.8127 76.4974,21.146 76,18.5C 74.4348,21.8943 72.4348,22.2277 70,19.5C 69.7638,21.764 69.2638,23.9307 68.5,26C 63.8452,26.4992 59.1785,26.6658 54.5,26.5C 54.5,22.8333 54.5,19.1667 54.5,15.5C 55.4345,14.4324 55.7678,13.099 55.5,11.5 Z"/></g>
+                    <g><path style="opacity:0.948" fill="#2a2474" d="M 81.5,25.5 C 81.5,24.5 81.5,23.5 81.5,22.5C 81.3347,18.8183 81.5014,15.1516 82,11.5C 83.0113,10.6634 84.1779,10.33 85.5,10.5C 85.3379,12.5273 85.5045,14.5273 86,16.5C 89.1994,13.8705 92.1994,14.2039 95,17.5C 96.6773,22.6545 94.8439,25.6545 89.5,26.5C 86.8094,26.1845 84.1427,25.8511 81.5,25.5 Z M 88.5,19.5 C 91.5476,19.494 92.0476,20.494 90,22.5C 88.9614,21.7562 88.4614,20.7562 88.5,19.5 Z"/></g>
+                    <g><path style="opacity:0.904" fill="#ed6228" d="M 55.5,11.5 C 55.7678,13.099 55.4345,14.4324 54.5,15.5C 54.6106,13.3523 53.944,13.019 52.5,14.5C 51.6747,18.1224 51.1747,21.789 51,25.5C 49.6667,26.8333 48.3333,26.8333 47,25.5C 46.8253,21.789 46.3253,18.1224 45.5,14.5C 44.4763,15.8532 43.143,16.5198 41.5,16.5C 42.6005,15.3951 43.2671,14.0618 43.5,12.5C 47.1163,10.1581 51.1163,9.82475 55.5,11.5 Z"/></g>
+                    <g><path style="opacity:0.967" fill="#2b2871" d="M 107.5,17.5 C 107.954,12.5247 110.121,11.5247 114,14.5C 114.5,14.3333 115,14.1667 115.5,14C 114.359,13.2588 114.359,12.4255 115.5,11.5C 116.002,10.479 116.668,10.3123 117.5,11C 119.291,15.9675 119.958,21.1341 119.5,26.5C 118.167,26.5 116.833,26.5 115.5,26.5C 115.665,23.1501 115.498,19.8168 115,16.5C 113.529,17.3805 112.696,18.7139 112.5,20.5C 113.204,22.5351 113.871,24.5351 114.5,26.5C 112.856,26.7135 111.356,26.3802 110,25.5C 109.057,22.7493 108.224,20.0826 107.5,17.5 Z"/></g>
+                    <g><path style="opacity:0.893" fill="#2b2670" d="M 107.5,17.5 C 108.694,22.4058 106.861,25.4058 102,26.5C 95.7583,23.8905 94.925,20.0572 99.5,15C 102.775,14.0182 105.441,14.8515 107.5,17.5 Z M 100.5,19.5 C 101.675,19.281 102.675,19.6143 103.5,20.5C 101.948,21.7979 100.948,21.4646 100.5,19.5 Z"/></g>
+                    <g><path style="opacity:0.78" fill="#2a246e" d="M 130.5,23.5 C 130.5,24.5 130.5,25.5 130.5,26.5C 128.508,26.6715 126.842,26.0049 125.5,24.5C 124.158,26.0049 122.492,26.6715 120.5,26.5C 120.724,24.2133 121.391,22.0466 122.5,20C 121.144,18.4329 120.477,16.5996 120.5,14.5C 122.451,14.2267 123.951,14.8934 125,16.5C 126.049,14.8934 127.549,14.2267 129.5,14.5C 129.528,16.5824 128.861,18.4157 127.5,20C 128.163,21.5185 129.163,22.6851 130.5,23.5 Z"/></g>
+                    <g><path style="opacity:0.846" fill="#eb622a" d="M 43.5,12.5 C 43.2671,14.0618 42.6005,15.3951 41.5,16.5C 40.8333,16.5 40.1667,16.5 39.5,16.5C 40.7653,17.4793 42.0986,18.4793 43.5,19.5C 45.52,23.6976 44.1867,26.0309 39.5,26.5C 36.3328,25.9993 33.9995,24.3326 32.5,21.5C 34.0453,20.5481 35.712,20.2148 37.5,20.5C 30.5388,16.3925 30.8722,13.0592 38.5,10.5C 40.5139,10.4365 42.1806,11.1032 43.5,12.5 Z M 37.5,20.5 C 38.4734,20.9867 39.4734,21.4867 40.5,22C 38.8425,22.7252 37.8425,22.2252 37.5,20.5 Z M 39.5,16.5 C 38.7109,16.2172 38.0442,15.7172 37.5,15C 38.816,14.4719 39.4827,14.9719 39.5,16.5 Z"/></g>
+                    </svg>
+                <!-- <img  id="logo"  src="D:\pyshell\img\logo.svg"  > -->
+        <!-- <span class="logo-sub-title-wrapper"> -->
+            <!-- <span class="logo-sub-title">Python Shell</span> -->
+        <!-- </span> -->
+        </a></h1>
+ <div class="button-row">
+        <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+            <i class="fas fa-moon"></i> 
+        </button>
+        <button class="fullscreen-btn dark-mode-toggle" onclick="toggleFullscreen()">
+            <i class="fas fa-expand"></i> 
+        </button>
+        <button class="execute-btn">Execute</button>
+        
+        <button class="save-btn">Save</button>
+        <button class="stop-btn">Stop</button>
+       
+        <button class="clear-all-btn">Clear All</button>
+        <button class="clear-btn">Clear Output</button>
+        <input type="file" id="file-input" accept=".py"  style="display: none;">
+        <button class="open-btn">Open</button>
+       
+    </div>  
+    </div>
+    </div>
+<div class="input">
+    <div class="column">
+        <textarea class="shell-input" name="code" 
+        placeholder="Enter Python code here"
+        >
+            <!-- # Online Python compiler (interpreter) to run Python online.
+            # Write Python 3 code in this online editor and run it.
+            print("Hello world") -->
+        </textarea>
+        <textarea class="shell-user-input" name="code" placeholder="Enter user input"></textarea>
+   
+    </div>
+    </div>
+
+</div>
+        <div class="column">
+            <div class="output">
+                
+                    <textarea class="shell-output" id="output"></textarea>
+                </div>
+           
+    </div>
+    
+    <script>
+        const codeInput = document.querySelector('.shell-input');
+        const userInput = document.querySelector('.shell-user-input');
+        const executeBtn = document.querySelector('.execute-btn');
+        const clearBtn = document.querySelector('.clear-btn');
+        const outputDiv = document.querySelector('.shell-output');
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        const saveBtn = document.querySelector('.save-btn');
+        const clearAllBtn = document.querySelector('.clear-all-btn');
+        const openBtn = document.querySelector('.open-btn');
+        const fileInput = document.getElementById('file-input');
+
+        
+       
+
+
+// execute button event
+        executeBtn.addEventListener('click', () => {
+            const code = codeInput.value;
+            const user_input = userInput.value; // Get the user input
+
+            outputDiv.textContent = 'Executing...';
+            stopExecution = false; // Reset stopExecution flag
+
+            fetch('/execute', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `code=${encodeURIComponent(code)}&user_input=${encodeURIComponent(user_input)}` // Pass the user input in the request
+        })
+                .then(response => response.text())
+                .then(output => {
+                    outputDiv.innerHTML = `${output}`;
+                })
+                .catch(error => {
+                    outputDiv.textContent = `Error: ${error}`;
+              });
+        });
+        // stop button event
+        const stopBtn = document.querySelector('.stop-btn');
+        stopBtn.addEventListener('click', () => {
+            stopExecution = true; // Set stopExecution flag to true
+        });
+// clear btn event
+        clearBtn.addEventListener('click', () => {
+            outputDiv.innerHTML = '';
+        });
+// darkmode button event
+function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            codeInput.classList.toggle('dark-mode');
+        } 
+// fullscreen btn event
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+                    document.documentElement.mozRequestFullScreen();
+                } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                    document.documentElement.webkitRequestFullscreen();
+                } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+                    document.documentElement.msRequestFullscreen();
+                }
+                darkModeToggle.classList.add('fullscreen');
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) { // Firefox
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { // IE/Edge
+                    document.msExitFullscreen();
+                }
+                darkModeToggle.classList.remove('fullscreen');
+            }
+        }
+        // save button event
+        
+        saveBtn.addEventListener('click', () => {
+            const code = codeInput.value;
+
+            // Save code to local storage
+            localStorage.setItem('code', code);
+
+            // Generate and save .py file
+            const filename = 'script.py';
+            const blob = new Blob([code], { type: 'text/plain' });
+
+            if (typeof navigator.msSaveBlob !== 'undefined') {
+                navigator.msSaveBlob(blob, filename);
+            } else {
+                const link = document.createElement('a');
+                if (link.download !== undefined) {
+                    const url = URL.createObjectURL(blob);
+                    link.setAttribute('href', url);
+                    link.setAttribute('download', filename);
+                    link.style.visibility = 'hidden';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
+            }
+        });
+
+        // Load code from local storage if available
+        const savedCode = localStorage.getItem('code');
+        if (savedCode) {
+            codeInput.value = savedCode;
+        }
+        
+        // clear all button event
+clearAllBtn.addEventListener('click', () => {
+    codeInput.value = ''; // Clear the Python code input
+    document.querySelector('.shell-user-input').value = ''; // Clear the user input textarea
+    outputDiv.innerHTML = ''; // Clear the output textarea
+});
+       // Open button event
+       openBtn.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        // Handle the selected file
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const fileContent = e.target.result;
+                codeInput.value = fileContent;
+            };
+
+            reader.readAsText(file);
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Python Web Shell</title>
+    <style>
+        /* CSS styles */
+
+        body {
+            font-family: monospace;
+        }
+
+        .shell-container {
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+           
+            border-radius: 5px;
+        }
+
+        .shell-input {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+        }
+
+        .shell-output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            height: 200px;
+            overflow-y: scroll;
+        }
+
+        .shell-output::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .shell-output::-webkit-scrollbar-track {
+            background-color: #f5f5f5;
+        }
+
+        .shell-output::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 3px;
+        }
+
+        .shell-output::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+
+        .shell-output pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+
+        .execute-btn {
+            display: block;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .clear-btn {
+            display: block;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="shell-container">
+        <h1>Python Web Shell</h1>
+        <textarea class="shell-input" name="code" placeholder="Enter Python code here"></textarea>
+        <button class="execute-btn">Execute</button>
+        <button class="clear-btn">Clear Output</button>
+        <div class="shell-output" id="output"></div>
+    </div>
+
+    <script>
+        const codeInput = document.querySelector('.shell-input');
+        const executeBtn = document.querySelector('.execute-btn');
+        const clearBtn = document.querySelector('.clear-btn');
+        const outputDiv = document.querySelector('.shell-output');
+
+        function setContainerSize() {
+            const windowHeight = window.innerHeight;
+            const windowWidth = window.innerWidth;
+            const containerWidth = Math.min(800, windowWidth * 0.8);
+            const containerHeight = windowHeight * 0.6;
+            const shellContainer = document.querySelector('.shell-container');
+            shellContainer.style.width = `${containerWidth}px`;
+            shellContainer.style.height = `${containerHeight}px`;
+        }
+
+        setContainerSize();
+
+        window.addEventListener('resize', setContainerSize);
+
+        executeBtn.addEventListener('click', () => {
+            const code = codeInput.value;
+            outputDiv.textContent = 'Executing...';
+            fetch('/execute', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `code=${encodeURIComponent(code)}`
+            })
+                .then(response => response.text())
+                .then(output => {
+                    outputDiv.innerHTML = `<pre>${output}</pre>`;
+                })
+                .catch(error => {
+                    outputDiv.textContent = `Error: ${error}`;
+                });
+        });
+
+        clearBtn.addEventListener('click', () => {
+            outputDiv.innerHTML = '';
+        });
+    </script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Python Web Shell</title>
+    <style>
+        /* CSS styles */
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* .shell-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #fff;
+            /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+        } */
+
+        h1 {
+            font-size: 24px;
+            /* text-align: center; */
+        }
+
+        .shell-input {
+            width: 100%;
+            height: 300px;
+            padding: 10px;
+            background-color: #050505;
+            color: #fffafa;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            /* resize: none; */
+        }
+
+        .shell-output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #1e1d1d;
+            color: #f2efef;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            height: 200px;
+            overflow-y: scroll;
+            float: right;
+            width: 50%;
+        }
+
+        .shell-output::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .shell-output::-webkit-scrollbar-track {
+            background-color: #f5f5f5;
+        }
+
+        .shell-output::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 3px;
+        }
+
+        .shell-output::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+
+        .shell-output pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+
+        .execute-btn,
+        .clear-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .execute-btn:hover,
+        .clear-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .clear-btn {
+            margin-left: 10px;
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="shell-container">
+        <h1>Python Web Shell</h1>
+        <button class="execute-btn">Execute</button>
+        <button class="clear-btn">Clear Output</button>
+       
+        <textarea class="shell-input" name="code" placeholder="Enter Python code here"></textarea>
+        
+        
+        <div class="shell-output" id="output"></div>
+        <div style="clear: both;"></div>
+    </div>
+
+    <script>
+        const codeInput = document.querySelector('.shell-input');
+        const executeBtn = document.querySelector('.execute-btn');
+        const clearBtn = document.querySelector('.clear-btn');
+        const outputDiv = document.querySelector('.shell-output');
+
+        function setContainerSize() {
+            const windowHeight = window.innerHeight;
+            const windowWidth = window.innerWidth;
+            const containerWidth = Math.min(800, windowWidth * 0.8);
+            const containerHeight = windowHeight * 0.6;
+            const shellContainer = document.querySelector('.shell-container');
+            shellContainer.style.width = containerWidth + 'px';
+            shellContainer.style.height = containerHeight + 'px';
+        }
+
+        setContainerSize();
+
+        window.addEventListener('resize', setContainerSize);
+
+        executeBtn.addEventListener('click', () => {
+            const code = codeInput.value;
+            outputDiv.textContent = 'Executing...';
+            fetch('/execute', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'code=' + encodeURIComponent(code)
+            })
+                .then(response => response.text())
+                .then(output => {
+                    outputDiv.innerHTML = '<pre>' + output + '</pre>';
+                })
+                .catch(error => {
+                    outputDiv.textContent = 'Error: ' + error;
+                });
+        });
+
+        clearBtn.addEventListener('click', () => {
+            outputDiv.innerHTML = '';
+        });
+    </script>
+</body>
+</html>
+ -->
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Python Web Shell</title>
+</head>
+<body>
+    <h1>Python Web Shell</h1>
+    <form action="/execute" method="post">
+        <textarea name="code" rows="10" cols="50" placeholder="Enter Python code here"></textarea>
+        <br>
+        <input type="submit" value="Execute">
+        
+    </form>
+    <button id="clear-output-button">Clear Output</button>
+    <div >
+       
+
+    <textarea  id="output" name="code" rows="10" cols="50" placeholder="Enter Python code here"></textarea>
+    </div>
+    <script>
+        // const form = document.querySelector('form');
+        // form.addEventListener('submit', (e) => {
+        //     e.preventDefault();
+        //     const code = document.querySelector('textarea').value;
+        //     const outputDiv = document.querySelector('#output');
+        //     outputDiv.textContent = 'Executing...';
+        //     fetch('/execute', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/x-www-form-urlencoded'
+        //         },
+        //         body: `code=${encodeURIComponent(code)}`
+        //     })
+        //     .then(response => response.text())
+        //     .then(output => {
+        //         outputDiv.textContent = output;
+        //     })
+        //     .catch(error => {
+        //         outputDiv.textContent = `Error: ${error}`;
+        //     });
+        // });
+        const form = document.querySelector('form');
+const clearButton = document.querySelector('#clear-output-button');
+const codeInput = document.querySelector('textarea');
+const outputDiv = document.querySelector('#output');
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const code = codeInput.value;
+    outputDiv.textContent = 'Executing...';
+    fetch('/execute', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `code=${encodeURIComponent(code)}`
+    })
+        .then(response => response.text())
+        .then(output => {
+            outputDiv.textContent = output;
+        })
+        .catch(error => {
+            outputDiv.textContent = `Error: ${error}`;
+        });
+});
+
+clearButton.addEventListener('click', () => {
+    outputDiv.textContent = '';
+});
+
+    </script>
+</body>
+</html>   
+-->
+
+
+<!-- all work 1+1 print numpy pandas -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Python Web Shell</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #container {
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #code-input {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+        }
+
+        #execute-btn {
+            display: block;
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Python Web Shell</h1>
+        <form method="POST" action="/execute">
+            <textarea id="code-input" name="code" placeholder="Enter your Python code..."></textarea>
+            <input id="execute-btn" type="submit" value="Execute">
+        </form>
+        <div id="output">
+            {{ output }}
+        </div>
+    </div>
+</body>
+</html> -->
+
+
+
+<!-- terminal demo -->
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Python Web Shell</title>
+    <style>
+        /* CSS styles */
+
+        /* ... (existing styles) */
+
+        .terminal {
+            position: relative;
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        .terminal-input {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+        }
+
+        .terminal-output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            height: 200px;
+            overflow-y: scroll;
+        }
+
+        /* ... (existing styles) */
+
+    </style>
+</head>
+<body>
+    <div class="shell-container">
+        <h1>Python Web Shell</h1>
+        <div class="terminal">
+            <textarea class="terminal-input" name="command" placeholder="Enter command here"></textarea>
+            <div class="terminal-output" id="output"></div>
+           
+        </div>
+        <button class="execute-btn">Execute</button>
+        <button class="clear-btn">Clear Output</button>
+    </div>
+
+    <script>
+        const terminalInput = document.querySelector('.terminal-input');
+        const executeBtn = document.querySelector('.execute-btn');
+        const clearBtn = document.querySelector('.clear-btn');
+        const terminalOutput = document.querySelector('.terminal-output');
+        const history = [];
+
+        function executeCommand(command) {
+            // Add command to history
+            history.push(command);
+
+            // Send the command to the backend for execution
+            fetch('/execute', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ command })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Get the output from the backend
+                const output = data.output;
+
+                // Display the output in the terminal
+                terminalOutput.innerHTML += `<pre><span class="command">> ${command}</span>\n${output}\n</pre>`;
+            })
+            .catch(error => {
+                console.log('Error:', error);
+            });
+
+            // Clear the input
+            terminalInput.value = '';
+        }
+
+        terminalInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const command = terminalInput.value.trim();
+                executeCommand(command);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                const currentIndex = history.indexOf(terminalInput.value);
+                if (currentIndex > 0) {
+                    terminalInput.value = history[currentIndex - 1];
+                }
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                const currentIndex = history.indexOf(terminalInput.value);
+                if (currentIndex < history.length - 1) {
+                    terminalInput.value = history[currentIndex + 1];
+                } else {
+                    terminalInput.value = '';
+                }
+            }
+        });
+
+        executeBtn.addEventListener('click', () => {
+            const command = terminalInput.value.trim();
+            executeCommand(command);
+        });
+
+        clearBtn.addEventListener('click', () => {
+            terminalOutput.innerHTML = '';
+        });
+    </script>
+</body>
+</html> -->
+
+
+
+
+   
